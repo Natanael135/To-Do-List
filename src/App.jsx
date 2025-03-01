@@ -11,7 +11,7 @@ const Layout = styled.div`
 
 const MainContent = styled.main`
   flex: 1;
-  padding: 20px;
+  background-color: #fef6e4;
 `;
 
 const App = () => {
