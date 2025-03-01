@@ -1,13 +1,29 @@
-import { useState } from 'react'
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ToDoList from './Pages/ToDoList';
+import styled from 'styled-components';
 
-function App() {
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+`;
 
+const MainContent = styled.main`
+  flex: 1;
+  padding: 20px;
+`;
 
+const App = () => {
   return (
-    <>
- 
-    </>
-  )
-}
+    <Layout>
+      <Header />
+      <MainContent>
+        <ToDoList />
+      </MainContent>
+      <Footer />
+    </Layout>
+  );
+};
 
-export default App
+export default App;
