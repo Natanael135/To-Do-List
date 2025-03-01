@@ -116,6 +116,7 @@ const EditInput = styled.input`
   border: 1px solid #f582ae;
   border-radius: 5px;
   margin-right: 5px;
+  max-width: 50%;
 `;
 
 const ToDoListPage = () => {
