@@ -116,7 +116,8 @@ const EditInput = styled.input`
   border: 1px solid #f582ae;
   border-radius: 5px;
   margin-right: 5px;
-  max-width: 50%;
+  flex: 1;
+  min-width: 0;
 `;
 
 const ToDoListPage = () => {
@@ -143,7 +144,6 @@ const ToDoListPage = () => {
     }
   }, [tasks]);
 
-  // Manipulando tasks
   const addTask = () => {
     if (task.trim()) {
       const newTask = {
@@ -177,7 +177,6 @@ const ToDoListPage = () => {
     }
   };
 
-  // Marcando task como concluída
   const toggleTaskCompletion = id => {
     setTasks(prevTasks =>
       prevTasks.map(task =>
@@ -207,17 +206,23 @@ const ToDoListPage = () => {
                 display: 'flex',
                 alignItems: 'center',
                 minWidth: 0,
+                gap: '10px',
               }}
             >
               {editingId === task.id ? (
                 <>
+                  <input
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={() => toggleTaskCompletion(task.id)}
+                    disabled
+                  />
                   <EditInput
                     type="text"
                     value={editedText}
                     onChange={e => setEditedText(e.target.value)}
                     onKeyUp={e => e.key === 'Enter' && saveEdit()}
                   />
-                  <SaveButton onClick={saveEdit}>Salvar</SaveButton>
                 </>
               ) : (
                 <>
@@ -235,22 +240,23 @@ const ToDoListPage = () => {
                 </>
               )}
             </div>
-            <divs
-              style={{
-                display: 'flex',
-                flexdirection: 'row',
-              }}
-            >
-              <EditButton
-                onClick={() => startEditing(task.id, task.text)}
-                disabled={editingId !== null && editingId !== task.id}
-              >
-                Editar
-              </EditButton>
-              <DeleteButton onClick={() => deleteTask(task.id)}>
-                Excluir
-              </DeleteButton>
-            </divs>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              {editingId === task.id ? (
+                <SaveButton onClick={saveEdit}>Salvar</SaveButton>
+              ) : (
+                <>
+                  <EditButton
+                    onClick={() => startEditing(task.id, task.text)}
+                    disabled={editingId !== null && editingId !== task.id}
+                  >
+                    Editar
+                  </EditButton>
+                  <DeleteButton onClick={() => deleteTask(task.id)}>
+                    Excluir
+                  </DeleteButton>
+                </>
+              )}
+            </div>
           </ToDoItem>
         ))}
       </ToDoList>
