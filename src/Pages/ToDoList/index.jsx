@@ -68,6 +68,13 @@ const ToDoItem = styled.li`
     cursor: pointer;
     margin-right: 10px;
   }
+
+  span {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    flex: 1;
+    min-width: 0;
+  }
 `;
 
 const ActionButton = styled.button`
@@ -116,7 +123,7 @@ const ToDoListPage = () => {
   const [editingId, setEditingId] = useState(null);
   const [editedText, setEditedText] = useState('');
 
-  //carregando task ja salvas
+  // Carregando tasks já salvas
   const [tasks, setTasks] = useState(() => {
     try {
       const saved = localStorage.getItem('tasks');
@@ -135,7 +142,7 @@ const ToDoListPage = () => {
     }
   }, [tasks]);
 
-  //manipulando tasks, crud bem simples
+  // Manipulando tasks
   const addTask = () => {
     if (task.trim()) {
       const newTask = {
@@ -169,7 +176,7 @@ const ToDoListPage = () => {
     }
   };
 
-  //marcando task como conlcuida
+  // Marcando task como concluída
   const toggleTaskCompletion = id => {
     setTasks(prevTasks =>
       prevTasks.map(task =>
@@ -193,7 +200,14 @@ const ToDoListPage = () => {
       <ToDoList>
         {tasks.map(task => (
           <ToDoItem key={task.id} className={task.completed ? 'completed' : ''}>
-            <div style={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+            <div
+              style={{
+                flexGrow: 1,
+                display: 'flex',
+                alignItems: 'center',
+                minWidth: 0,
+              }}
+            >
               {editingId === task.id ? (
                 <>
                   <EditInput
@@ -211,13 +225,21 @@ const ToDoListPage = () => {
                     checked={task.completed}
                     onChange={() => toggleTaskCompletion(task.id)}
                   />
-                  <span onClick={() => toggleTaskCompletion(task.id)}>
+                  <span
+                    onClick={() => toggleTaskCompletion(task.id)}
+                    style={{ display: 'inline-block', width: '100%' }}
+                  >
                     {task.text}
                   </span>
                 </>
               )}
             </div>
-            <div>
+            <divs
+              style={{
+                display: 'flex',
+                flexdirection: 'row',
+              }}
+            >
               <EditButton
                 onClick={() => startEditing(task.id, task.text)}
                 disabled={editingId !== null && editingId !== task.id}
@@ -227,7 +249,7 @@ const ToDoListPage = () => {
               <DeleteButton onClick={() => deleteTask(task.id)}>
                 Excluir
               </DeleteButton>
-            </div>
+            </divs>
           </ToDoItem>
         ))}
       </ToDoList>
