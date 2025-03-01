@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-
 const ToDoListContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -181,7 +180,7 @@ const ToDoListPage = () => {
 
   return (
     <ToDoListContainer>
-      <h1>Minha To-Do List</h1>
+      <h1>To-Do List</h1>
       <ToDoInput
         type="text"
         placeholder="Digite sua tarefa..."
