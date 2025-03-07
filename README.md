@@ -64,7 +64,7 @@ O layout se adapta a diferentes tamanhos de tela:
 
 1. **Clone o repositório**
    ```bash
-  https://github.com/Natanael135/To-Do-List.git
+   Git clone https://github.com/Natanael135/To-Do-List.git
    ```
 2. **Instale as dependências**
    ```bash
